@@ -1,0 +1,8 @@
+package com.javaprograms.simplecalculater;
+
+public enum Operations {
+    Add,
+    Subtract,
+    Multiply,
+    Divide
+}
