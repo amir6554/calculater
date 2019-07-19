@@ -1,0 +1,137 @@
+package com.javaprograms.simplecalculater;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText num1EditText;
+    private EditText num2EditText;
+    private TextView operationTextView;
+    private TextView resultTextView;
+    private Button additionButton;
+    private Button subtractionButton;
+    private Button multiplicationButton;
+    private Button divisionButton;
+    private Button equalityButton;
+    private Operations operation=null;
+    private String answerText;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+    num1EditText = findViewById(R.id.num1Id);
+    num2EditText = findViewById(R.id.num2Id);
+    operationTextView = findViewById(R.id.operationId);
+    resultTextView = findViewById(R.id.resultId);
+    additionButton = findViewById(R.id.additionId);
+    subtractionButton = findViewById(R.id.subtractionId);
+    multiplicationButton = findViewById(R.id.multiplicationId);
+    divisionButton = findViewById(R.id.divisionId);
+
+    additionButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            operationTextView.setText("+");
+            operation = Operations.Add;
+        }
+    });
+    subtractionButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            operationTextView.setText("-");
+                operation = Operations.Subtract;
+        }
+    });
+    multiplicationButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            operationTextView.setText("×");
+                operation = Operations.Multiply;
+        }
+    });
+    divisionButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            operationTextView.setText("÷");
+                operation = Operations.Divide;
+        }
+    });
+    equalityButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String firstInputText = num1EditText.getText().toString();
+            String secondInputText = num2EditText.getText().toString();
+            if (firstInputText.isEmpty()||secondInputText.isEmpty())
+            {
+                Toast.makeText(MainActivity.this, "enter value", Toast.LENGTH_LONG).show();
+            }
+            else {
+                if (operation == Operations.Add) {
+                    double num1,num2,result;
+                    num1 = Double.valueOf(firstInputText);
+                    num2 = Double.valueOf(secondInputText);
+                    result = add(num1,num2);
+                    answerText = String.valueOf(result);
+                    resultTextView.setText(answerText);
+                }
+                if (operation == Operations.Subtract) {
+                    double num1,num2,result;
+                    num1 = Double.valueOf(firstInputText);
+                    num2 = Double.valueOf(secondInputText);
+                    result = subtract(num1,num2);
+                    answerText = String.valueOf(result);
+                    resultTextView.setText(answerText);
+                }
+                if (operation == Operations.Multiply) {
+                    double num1,num2,result;
+                    num1 = Double.valueOf(firstInputText);
+                    num2 = Double.valueOf(secondInputText);
+                    result = multiply(num1,num2);
+                    answerText = String.valueOf(result);
+                    resultTextView.setText(answerText);
+                }
+                if (operation == Operations.Divide) {
+                    double num1,num2,result;
+                    num1 = Double.valueOf(firstInputText);
+                    num2 = Double.valueOf(secondInputText);
+                    result = divide(num1,num2);
+                    answerText = String.valueOf(result);
+                    resultTextView.setText(answerText);
+                }
+            }
+        }
+    });
+    }
+
+    public double add(double num1,double num2)
+    {
+        double result;
+        result = num1+num2;
+        return result;
+    }
+    public double subtract(double num1,double num2)
+    {
+        double result;
+        result = num1-num2;
+        return result;
+    }
+    public double multiply(double num1,double num2)
+    {
+        double result;
+        result = num1*num2;
+        return result;
+    }
+    public double divide(double num1,double num2)
+    {
+        double result;
+        result = num1/num2;
+        return result;
+    }
+}
